@@ -1,6 +1,9 @@
+import dns from "node:dns";
+dns.setServers(["8.8.8.8", "8.8.4.4"]);
+
+import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
-import dotenv from 'dotenv';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
 import mongoose from 'mongoose';
@@ -15,15 +18,16 @@ import Food from './models/Food.js';
 import User from './models/User.js';
 import bcrypt from 'bcryptjs';
 
-dotenv.config();
-
-const ensureDefaultAdminUser = async () => {
+const ensureDefaultAdmin = async () => {
   try {
-    const existingAdmin = await User.findOne({ email: 'admin@restaurant.com' });
-    if (existingAdmin) return;
-    const hashedPassword = await bcrypt.hash('admin123', 10);
-    await User.create({ name: 'Admin', email: 'admin@restaurant.com', password: hashedPassword, role: 'admin' });
-    console.log('Default admin user ready');
+    const email = process.env.ADMIN_EMAIL;
+    const password = process.env.ADMIN_PASSWORD;
+    if (!email || !password) return;
+    const existing = await User.findOne({ email });
+    if (existing) return;
+    const hashed = await bcrypt.hash(password, 10);
+    await User.create({ name: 'Admin', email, password: hashed, role: 'admin' });
+    console.log('Admin user created');
   } catch (error) {
     console.error('Admin seed error:', error);
   }
@@ -36,7 +40,7 @@ initSocket(httpServer);
 app.use(helmet());
 app.use(
   cors({
-    origin: ["https://restroorder-2.onrender.com"],
+    origin: ["http://localhost:5173","https://restroorder-2.onrender.com",],
     credentials: true,
   }),
 );
@@ -84,7 +88,7 @@ mongoose
       ]);
       console.log('✅ Menu items seeded successfully');
     }
-    await ensureDefaultAdminUser();
+    await ensureDefaultAdmin();
     httpServer.listen(PORT, () => console.log(`\n✅ Server running on http://localhost:${PORT}\n`));
   })
   .catch((err) => {

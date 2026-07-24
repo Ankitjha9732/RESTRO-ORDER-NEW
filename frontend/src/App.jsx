@@ -398,7 +398,7 @@ function AdminPanel({ auth, login, orders, logout, updateOrderStatus, loadingOrd
       {!auth.token || !isAdmin ? (
         <form onSubmit={login} className="mx-auto max-w-md rounded-3xl border border-white/10 bg-slate-900/70 p-6">
           <h2 className="text-2xl font-semibold">Admin Login</h2>
-          <p className="mt-2 text-sm text-slate-400">Use admin@restaurant.com with password admin123 for the seeded demo account.</p>
+          <p className="mt-2 text-sm text-slate-400">Contact the restaurant owner for admin credentials.</p>
           <input name="email" type="email" placeholder="Email" className="mt-4 w-full rounded-2xl border border-white/10 bg-slate-950 px-4 py-3" />
           <input name="password" type="password" placeholder="Password" className="mt-4 w-full rounded-2xl border border-white/10 bg-slate-950 px-4 py-3" />
           <button className="mt-6 w-full rounded-full bg-amber-500 px-4 py-3 font-semibold text-slate-950">Sign In</button>
