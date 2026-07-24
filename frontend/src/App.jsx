@@ -256,7 +256,6 @@ function App() {
             <Link to="/admin" className="hover:text-amber-400">Admin</Link>
           </nav>
           <div className="flex items-center gap-3">
-            <button onClick={() => setMode(mode === 'dark' ? 'light' : 'dark')} className="rounded-full border px-3 py-2">{mode === 'dark' ? '☀️' : '🌙'}</button>
             <button className="rounded-full bg-amber-500 p-3 text-slate-950"><FiShoppingCart /></button>
           </div>
         </div>
