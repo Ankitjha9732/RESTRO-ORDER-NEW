@@ -40,7 +40,7 @@ initSocket(httpServer);
 app.use(helmet());
 app.use(
   cors({
-    origin: ["http://localhost:5173","https://restroorder-2.onrender.com",],
+    origin: ["http://localhost:5173","https://restro-order-new.vercel.app",],
     credentials: true,
   }),
 );
