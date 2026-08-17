@@ -4,6 +4,8 @@ A production-style **MERN stack** restaurant ordering platform with a customer-f
 
 **Live demo** → [restro-order-new.vercel.app](https://restro-order-new.vercel.app/)
 
+<p align="center"><img src="preview.png" alt="RestroOrder app preview" width="720" /></p>
+
 ## ✨ Features
 
 - **QR table-based ordering flow** — customers scan a table QR to browse the menu and order
